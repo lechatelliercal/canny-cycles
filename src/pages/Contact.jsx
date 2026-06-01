@@ -7,12 +7,24 @@ export default function Contact() {
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // In production, this maps to your backend or email provider API endpoint
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+    if (!response.ok) {
+      throw new Error('Failed to send booking request');
+    }
     console.log('Booking Request Transmitted:', formData);
     setSubmitted(true);
-  };
+  } catch (error) {
+    console.error('Booking request failed:', error);
+    alert('Something went wrong. Please try again or contact Canny Cycle Services directly.');
+  }
+};
 
   return (
     <div className="bg-white py-12 md:py-20">
@@ -68,6 +80,8 @@ export default function Contact() {
                     <option>Standard Tune-Up (£75)</option>
                     <option>Full Overhaul Service (£145)</option>
                     <option>Custom Specific Mechanical Repair</option>
+                    <option>Family Multi Pack</option>
+                    <option>Other - Please Describe In Notes</option>
                   </select>
                 </div>
               </div>
@@ -92,9 +106,9 @@ export default function Contact() {
             </p>
             
             <div className="border-t border-gray-200 pt-4 space-y-2 text-sm text-gray-800 font-medium">
-              <p><span className="text-brandOrange font-bold mr-2">📍 Address:</span> Bridge of Canny, Inchmarlo, near Banchory, AB31</p>
-              <p><span className="text-brandOrange font-bold mr-2">📞 Phone:</span> +44 1330 82XXXX (Call or Text Callum)</p>
-              <p><span className="text-brandOrange font-bold mr-2">✉ Email:</span> callum@cannycycles.com</p>
+              <p><span className="text-brandOrange font-bold mr-2">📍 Address:</span> The Canny Workshop, Bridge of Canny, Inchmarlo, Banchory, AB31</p>
+              <p><span className="text-brandOrange font-bold mr-2">📞 Phone:</span> +44 7754770892 (Call or Text Callum)</p>
+              <p><span className="text-brandOrange font-bold mr-2">✉ Email:</span> lechatellier.cal@gmail.com</p>
             </div>
           </div>
 
@@ -108,11 +122,16 @@ export default function Contact() {
           </div>
 
           {/* Interactive Graphic Vector Map Placeholder */}
-          <div className="bg-slate-100 border border-gray-300 h-48 rounded-lg flex items-center justify-center p-4 text-center">
-            <div className="text-xs text-gray-500">
-              <span className="block font-bold text-brandBlue text-sm mb-1">🗺️ Map & Service Area Vector View</span>
-              Active Coverage Zone: Banchory, Inchmarlo, Kincardine O'Neil, Aboyne, and surrounding Deeside areas.
-            </div>
+          <div className="rounded-lg overflow-hidden border border-gray-300 h-64">
+          <iframe
+           title="Canny Cycle Services service area map"
+          src="https://www.google.com/maps?q=The%20Canny%20WOrkshop%20Banchory%20Aberdeenshire&output=embed"
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          />
           </div>
         </div>
       </div>
