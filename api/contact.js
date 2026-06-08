@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     const { name, email, phone, bikeType, serviceRequired, message } = req.body;
 
     await resend.emails.send({
-      from: 'Canny Cycle Services <Lechatellier.cal@gmail.com',
+      from: 'Canny Cycle Services <onboarding@resend.dev>',
       to: 'callum.lechat@gmail.com',
       subject: `New bike service enquiry from ${name}`,
       html: `
@@ -27,7 +27,7 @@ export default async function handler(req, res) {
     });
 
     await resend.emails.send({
-      from: 'Canny Cycle Services <Lechatellier.cal@gmail.com>',
+      from: 'Canny Cycle Services <onboarding@resend.dev>',
       to: email,
       subject: 'We’ve received your bike service enquiry',
       html: `
