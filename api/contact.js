@@ -13,7 +13,7 @@ export default async function handler(req, res) {
 
     await resend.emails.send({
       from: FROM,
-      to: 'callum.lechat@gmail.com',
+      to: 'callum@cannycycles.com',
       subject: `New bike service enquiry from ${name}`,
       html: `
         <h2>New Canny Cycle Services enquiry</h2>
