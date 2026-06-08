@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     const { name, email, phone, bikeType, serviceRequired, message } = req.body;
 
     await resend.emails.send({
-      from: 'Canny Cycle Services <send.cannycycles.com>',
+      from: 'Canny Cycle Services <callum@send.cannycycles.com>',
       to: 'callum.lechat@gmail.com',
       subject: `New bike service enquiry from ${name}`,
       html: `
@@ -27,7 +27,7 @@ export default async function handler(req, res) {
     });
 
     await resend.emails.send({
-      from: 'Canny Cycle Services <send.cannycycles.com>',
+      from: 'Canny Cycle Services <callum@send.cannycycles.com>',
       to: email,
       subject: 'We’ve received your bike service enquiry',
       html: `
@@ -40,6 +40,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ success: true });
   } catch (error) {
+    console.error('Resend error:', error);
     return res.status(500).json({ error: 'Email failed to send' });
   }
 }
