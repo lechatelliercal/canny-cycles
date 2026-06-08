@@ -1,7 +1,7 @@
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const FROM = 'Canny Cycle Services <callum@send.cannycycles.com>';
+const FROM = 'Canny Cycle Services <callum@cannycycles.com>';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
