@@ -1,6 +1,7 @@
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const FROM = 'Canny Cycle Services <callum@send.cannycycles.com>';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -11,7 +12,7 @@ export default async function handler(req, res) {
     const { name, email, phone, bikeType, serviceRequired, message } = req.body;
 
     await resend.emails.send({
-      from: 'Canny Cycle Services <callum@send.cannycycles.com>',
+      from: FROM,
       to: 'callum.lechat@gmail.com',
       subject: `New bike service enquiry from ${name}`,
       html: `
@@ -27,7 +28,7 @@ export default async function handler(req, res) {
     });
 
     await resend.emails.send({
-      from: 'Canny Cycle Services <callum@send.cannycycles.com>',
+      from: FROM,
       to: email,
       subject: 'We’ve received your bike service enquiry',
       html: `
